@@ -26,7 +26,7 @@ This repository includes:
 - **Other Tools**: PSpice, Bluebeam, SolidWorks
 
 ### How to Explore This Repository
-- View the **[Project Portfolio PDF](David Young Project Portfolio 01.16.25.pdf)** to get a detailed overview of my work.
+- View the **[Project Portfolio PDF](path-to-pdf)** to get a detailed overview of my work.
 - Explore the subdirectories for individual projects, where you'll find:
   - Source code
   - Simulation results
