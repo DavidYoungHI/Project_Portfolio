@@ -4,7 +4,7 @@ Welcome to my project portfolio repository! This repository serves as a showcase
 
 ## About This Repository
 This repository includes:
-- **Project Portfolio PDF**: A comprehensive document summarizing the projects I have worked on, including objectives, processes, and outcomes.
+- **[Project Portfolio PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David%20Young%20Project%20Portfolio%2001.16.25.pdf)**: A comprehensive document summarizing the projects I have worked on, including objectives, processes, and outcomes.
 - **[Resume PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David%20Young%20Resume%2001.22.25.pdf)**: My professional resume outlining my education, technical skills, and work experience.
 - **Supporting Files**: Code, reports, diagrams, and other materials relevant to the projects mentioned in the portfolio.
 
@@ -28,6 +28,7 @@ This repository includes:
 
 ### How to Explore This Repository
 - View the **[Project Portfolio PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David%20Young%20Project%20Portfolio%2001.16.25.pdf)** to get a detailed overview of my work.
+- See the **[Resume PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David%20Young%20Resume%2001.22.25.pdf)** to get a overview of academic and professional path.
 - Explore the subdirectories for individual projects, where you'll find:
   - Source code
   - Simulation results
