@@ -1,3 +1,11 @@
 ## Instruction Cache Project
-Contains the project definition, <br>.txt files of the instruction cache ("icache.txt"),<br> a simulated main memory ("memcontents.txt"),<br> the testbench used to verify my design,<br> and a file containing the addresses used in my testbench ("testaddresses.txt"). <br>
-The testbench code is included in the first section of the "icache.txt" file.
+
+This repository includes the complete **Instruction Cache Project**, featuring:
+
+- 📜 **Project Definition** – Outlines the cache design.
+- 💾 **Instruction Cache Source Files** – [`icache.txt`](./icache.txt).
+- 🏗 **Simulated Main Memory Dataset** – [`memcontents.txt`](./memcontents.txt).
+- 🛠 **Testbench for Verification** – Ensures correct cache operation.
+- 📍 **Test Address File** – [`testaddresses.txt`](./testaddresses.txt), used in the testbench for instruction fetching.
+
+📌 The **testbench code** is embedded in the first section of the [`icache.txt`](./icache.txt) file.
