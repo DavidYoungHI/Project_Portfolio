@@ -1,0 +1,217 @@
+// instrmem.sv
+//
+// RISC-V instruction memory
+// November 2	024
+// roger@wustl.edu
+//
+// Student: David Young
+// run 2000
+// Observe at least clk, PCF, IMRead, InstrF, IMRdy, MAddr, MRead, MData, and MRdy
+// to check correct operation.
+//
+//
+
+parameter N = 46;
+
+module testbench();
+
+  logic clk;
+  logic reset;
+
+  logic [31:0] PCF;            // PC in Fetch stage
+  logic [31:0] InstrF;         // Instr in Fetch stage
+  logic        IMRead, IMRdy;  // Control signals for instruction memory
+
+  logic [31:0] MAddr;          // Main memory address
+  logic [31:0] MData;          // Main memory data
+  logic        MRead, MRdy;    // Control signals for main memory
+
+  logic [31:0] index;              // Index into test instructions
+  logic [31:0] InstrAddrs[N-1:0];  // Test instruction addresses
+  logic 			validFlag, missFlag; 
+
+  // instantiate dut to be tested
+  icache dut(clk, reset, PCF, InstrF, IMRead, IMRdy, MAddr, MData, MRead, MRdy, validFlag, missFlag);
+  
+  // instantiate main memory
+  mmemory mem(clk, reset, MAddr, MData, MRead, MRdy);
+
+  // initialize test
+  initial
+    begin
+      $readmemh("testaddresses.txt",InstrAddrs);
+		// Display loaded values
+      for (int i = 0; i < N; i++) begin
+        $display("InstrAddrs[%0d] = %h", i, InstrAddrs[i]);
+      end
+      index <= 0;
+		PCF <= 32'h00000000;        // setup initial instruction. Was 32'h00000010
+		IMRead <= 0;
+      reset <= 1; #22; reset <= 0; // provide reset
+      IMRead <= 1;                // initiate first instruction fetch
+    end
+
+  // generate clock
+  always
+    begin
+      clk <= 1; #5; clk <= 0; #5;
+    end
+
+  // provide tests
+  always @(negedge clk)
+    begin
+      if (IMRdy === 1) begin
+        index <= index + 1;
+        if (index === N) begin
+          $display("All instructions fetched");
+          $stop;
+        end
+        PCF <= InstrAddrs[index];  // provide next address
+      end
+    end
+endmodule
+
+// icache - this is what is to be designed. Cache's capacity is 128 bytes = 32 Words.
+module icache(input  logic        clk, reset,
+              input  logic [31:0] A,            // address
+              output logic [31:0] RD,           // read data
+              input  logic        RE,           // read enable
+              output logic        RDY,          // data ready
+              output logic [31:0] MAddr,			// Address sent to main mem.
+              input  logic [31:0] MData,			// Data sent from Main mem.
+              output logic        MRead,			// Main mem read enable.
+              input  logic        MRdy,			// Main mem data is ready.
+				  output logic 		 validFlag,		// Tells me the valid bit.
+				  output logic			 missFlag);		// Tells me if there was a miss.
+
+  // INSERT YOUR DESIGN FOR ICACHE HERE
+  // The set number is determined by bits 6-2. Set number go from 0 to 31. Because this is a direct map cache, there will be only 1 way per set.
+
+  logic	tagFlag; // Set tagFlag 1 if the tag in A matches the tag in the cache. Set validFlag 1 if the valid bit for that set is 1.
+  logic [31:0] savAddress;	//Saves the address of the data that is being fetched by main mem.
+  logic [31:0] intData; 	// Data from the combinational logic sent to RD of instrmem.
+  logic intRDY; 				// Internal RDY.
+  logic [31:0] intMAddr;	// Internal MAddr signal.
+  logic intMRead;				// Internal MRead signal.
+
+  parameter dataLen = 32; // The data field in cache is 32 bits long.
+  parameter setLen = 5; // Because the capacity of cache is 32 words, there are 32 sets; thus, 5 bits are needed.
+  parameter tagLen = 30 - setLen; // The tag field in cache.
+  parameter numRows = 32;
+  parameter validBitNum  = numRows;
+
+  // Creating arrays
+  logic [dataLen-1:0] dataField [numRows-1:0];  //Holds the data field in cache. 32x32 bit array.
+  logic [tagLen-1:0] tagField [numRows-1:0];  //Holds the tag field in cache. (30 - setLen)x32 bit array.
+  logic valid [validBitNum-1:0]; //Array holding the valid bits of cache. 32x1 bit array.
+
+  //Clear valid bit when cache is first created.
+  always_ff @(posedge clk, posedge reset) begin
+    if (reset) begin			//If reset is asserted...
+		for (int i = 0; i < validBitNum; i++) begin
+			valid[i] <= 0;
+		end
+		RDY <= 0;
+		MRead <= 0;
+		RD <= 32'b0;
+		
+    end 
+	 
+	 else if (RE==0) begin 	// If the read enable is low...
+      RD <= 32'b0;
+      RDY <= 0;  
+    end
+	 
+	 else begin
+      if (MRdy) begin		// If data is ready from main memory...
+        RD <= MData;
+        RDY <= 1;
+		  dataField[savAddress[6:2]] <= MData;	// Write data to cache.
+		  tagField[savAddress[6:2]] <= savAddress[31:(tagLen + 2)]; 	//Save tag into cache.
+		  valid[savAddress[6:2]] <= 1;		//There is now valid info in this set number of the cache.
+      end
+		else if (missFlag) begin		// If there's a miss: send not ready and give data info to main mem.
+		  RDY <= 0;
+		  RD <= 32'b0;
+		  MAddr <= intMAddr;
+		  MRead <= 1;
+		end
+		else begin				// If the cache has the data.
+		  RDY <= 1;
+		  RD <= intData;
+		  MAddr <= 32'b0;
+		  MRead <= 0;
+		end
+	 end
+      
+  end 				//End of always_ff.
+    
+	 
+  always_comb begin					
+    validFlag = (valid[A[6:2]] !== 0); // If checking the valid bit.
+	 
+	 tagFlag = (tagField[A[6:2]] == A[31:(tagLen + 2)]); //if the tagfield in the cache matches the tag in the address...
+	 
+	 if (validFlag && tagFlag) begin 	// If we have a hit...
+	   missFlag = 0;
+      $display("We Have a hit");
+      intData = dataField[A[6:2]]; 	// Send the data to RD of the instruction cache.
+      intRDY = 1; 			// The data is ready!
+		intMRead = 0; 
+		intMAddr = 32'b0;
+		savAddress = 32'b0;
+    end else begin									//If we do not have a hit...
+	   missFlag = 1;
+		intRDY = 0;			//Send not ready
+		intData = 32'b0;	//Send zeros for data.
+		intMAddr = A;		//Give main mem address.
+		intMRead = 1;		//Set main mem read enable high.				
+		savAddress = A;		// Save address to write to cache after main mem has fetched.
+	 end 
+	 
+	 
+  end 				//End of always_comb block.
+endmodule
+
+
+
+// main memory. We check main memory only if the cache does not have the instruction we are looking for.
+// NOTE: this is testbench code, so is not synthesizable. It's basically a lookout table.
+module mmemory(input  logic        clk, reset,
+               input  logic [31:0] A,            // address
+               output logic [31:0] RD,           // read data
+               input  logic        RE,           // read enable
+               output logic        RDY);  	 // data ready  
+
+  logic [31:0] mem[63:0]; // size 64 words (256 bytes)
+  logic        busy;      // memory is currently responding to an earlier request
+
+  initial
+    begin
+      $readmemh("memcontents.txt",mem);
+      RDY <= 0;
+      RD <= 0;
+      busy <= 0;
+    end
+
+  always @(posedge clk)
+    begin
+      if (RE === 0)
+        begin
+          RDY <= 0;
+          RD <= 0;
+          busy <= 0;
+        end
+      else if (busy !== 1)
+        begin
+          RDY <= 0;
+          RD <= 0;
+          busy <= 1;
+          #92;
+          RDY <= 1;
+          RD <= mem[A[31:2]]; // word aligned. Each word is 4 bytes long. Thus, we ignore the bottom two bits. I.e. 1st instruction @ 0, 2nd @ 4, 3rd @ 8.
+          busy <= 0;
+        end
+    end
+
+  endmodule
