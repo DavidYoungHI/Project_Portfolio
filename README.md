@@ -9,22 +9,31 @@ This repository includes:
 - **Supporting Files**: Code, reports, diagrams, and other materials relevant to the projects mentioned in the portfolio.
 
 ### Featured Projects
-1. **Instruction Cache Implementation (SystemVerilog)**  
+1. **SDES Digital IC Design (Cadence Virtuoso)**
+   Designed, laid out, and simulated a CMOS-based digital chip implementing the Simplified DES encryption algorithm. Verified timing using transient simulation and met layout constraints of 1.5 mm × 1.5 mm.
+   
+3. **Greenhouse Irrigation System (ESP32 + Raspberry Pi)**
+   Developed a wireless, multi-plant irrigation system using ESP32 moisture sensors and a Raspberry Pi controller. Achieved closed-loop control with 80% target moisture and groundwork for GUI-based remote access.
+
+4. **3D Drone Control System (MATLAB + Simulink)**
+   Designed cascaded controllers for vertical, roll, pitch, and yaw motion using a linearized drone model. Verified controllability and tuned gains based on sampling bandwidths. Simulated and validated system via step responses in Simulink.
+   
+5. **Instruction Cache Implementation (SystemVerilog)**  
    Designed a direct-mapped instruction cache for a RISC-V processor using SystemVerilog, verified via testbench simulations.
    
-2. **Insulin Pump Controller (MATLAB)**  
+6. **Insulin Pump Controller (MATLAB)**  
    Developed a state-feedback and observer-based control system for regulating blood glucose levels with minimal overshoot.
 
-3. **Least-Square Image Classifier (MATLAB)**  
+7. **Least-Square Image Classifier (MATLAB)**  
    Created a model to classify handwritten digits from the MNIST dataset, achieving a 1.94% error rate with 5000 training images.
 
-4. **Quartic Equation Solver on FPGA (VHDL)**  
+8. **Quartic Equation Solver on FPGA (VHDL)**  
    Implemented a digital circuit to compute and display roots of a quartic equation on a 7-segment FPGA display.
 
 ## Tools and Technologies
-- **Languages**: MATLAB, VHDL, SystemVerilog, Python
+- **Languages**: MATLAB (and Simulink), VHDL, SystemVerilog, Python
 - **Platforms**: Intel Quartus Prime, Xilinx Vivado, Simulink
-- **Other Tools**: PSpice, Bluebeam, SolidWorks
+- **Other Tools**: Cadence, PSpice, Bluebeam, SolidWorks
 
 ### How to Explore This Repository
 - View the **[Project Portfolio PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David%20Young%20Project%20Portfolio%2001.16.25.pdf)** to get a detailed overview of my work.
