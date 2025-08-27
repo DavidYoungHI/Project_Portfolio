@@ -3,7 +3,7 @@
 This project showcases the complete **CMOS chip design and simulation** for implementing the **Simplified Data Encryption Standard (S-DES)** in hardware. It was developed as the final project for **CSE463M: Digital Integrated Circuit Design and Architecture**.
 
 - 📄 **Final Report** – [`ESE463_Project_Report.docx`](./ESE463_Project_Report.docx): Full technical documentation detailing architecture, schematic diagrams, timing plots, and chip layouts.
-- 📐 **CMOS Design Specs** – [`Final Project - Simplified DES algorithm CMOS chip design specifications.docx`](./Final%20Project%20-%20Simplified%20DES%20algorithm%20CMOS%20chip%20design%20specifications.docx): Project guidelines and constraints, including pin mappings, timing requirements, layout size, and design objectives.
+- 📐 **CMOS Design Specs** – [Final Project Guidelines - Simplified DES algorithm CMOS chip design specifications.docx](./Final%20Project%20Guidelines%20-%20Simplified%20DES%20algorithm%20CMOS%20chip%20design%20specifications.docx): Project guidelines and constraints, including pin mappings, timing requirements, layout size, and design objectives.
 
 ---
 
