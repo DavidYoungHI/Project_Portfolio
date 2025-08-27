@@ -10,3 +10,6 @@ This repository contains files related to my **Wireless Irrigation System Projec
 📌 The ESP32 reads from three capacitive moisture sensors and dynamically adjusts irrigation timing based on real-time moisture levels. In the future, we plan to complete the GUI to enable remote monitoring and manual override.
 
 📈 Over a 7-day testing period, the system successfully maintained ~80% soil moisture across all plants without human intervention.
+
+🌐 **Project Website** – Visit our official Capstone project page: [irrigationsystemcapstone.wustl.edu](https://sites.wustl.edu/irrigationsystemcapstone)
+
