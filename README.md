@@ -36,8 +36,8 @@ This repository includes:
 - **Other Tools**: Cadence, PSpice, Bluebeam, SolidWorks
 
 ### How to Explore This Repository
-- View the **[Project Portfolio PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David%20Young%20Project%20Portfolio%2008.27.25.pdf)** to get an overview of my work.
-- See the **[Resume PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David%20Young%20Resume%20Circuits%2009.06.25.pdf)** to get an overview of my academic and professional path.
+- View the **[Project Portfolio PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David_Young_Project_Portfolio_11_4_25.pdf)** to get an overview of my work.
+- See the **[Resume PDF](https://github.com/DavidYoungHI/Project_Portfolio/blob/main/David_Young_Resume_11.12.25.pdf)** to get an overview of my academic and professional path.
 - Explore the subdirectories for individual projects, where you'll find:
   - Source code
   - Simulation results
