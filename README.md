@@ -32,7 +32,7 @@ This repository includes:
 
 ## Tools and Technologies
 - **Languages**: MATLAB (and Simulink), VHDL, SystemVerilog, Python
-- **Platforms**: Intel Quartus Prime, Xilinx Vivado, Simulink
+- **Platforms**: Cadence Virtuoso, ADS, Intel Quartus Prime, Xilinx Vivado, Simulink
 - **Other Tools**: Cadence, PSpice, Bluebeam, SolidWorks
 
 ### How to Explore This Repository
