@@ -9,7 +9,7 @@ This repository includes:
 - **Supporting Files**: Code, reports, diagrams, and other materials relevant to the projects mentioned in the portfolio.
 
 ### Featured Projects
-10. **Analog IC Neural Amplifier (Cadence Virtuoso)**
+1. **Analog IC Neural Amplifier (Cadence Virtuoso)**
     Designed and simulated a low-noise MOSFET neural amplifier for biomedical signal acquisition. Achieved >40 dB gain, sub-0.1 Hz low-frequency cutoff, and stable     phase margin while analyzing tradeoffs between power consumption, bandwidth, and noise performance.
 
 9. **RF Low-Pass Filters (ADS – Lumped & Microstrip)**
